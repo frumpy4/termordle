@@ -40,6 +40,7 @@ EMOJI_YELLOW = "🟦" if cb else "🟨"
 EMOJI_GRAY   = "⬜"
 
 WORDLE_BEGIN = datetime.date(2021, 6, 19)
+day = (datetime.date.today() - WORDLE_BEGIN).days
 
 with open("daily.txt", "r") as f:
     daily_words = f.read().split(" ")
@@ -87,7 +88,7 @@ if args.word:
 
 else:
     if args.daily:
-        word = words[(datetime.date.today() - WORDLE_BEGIN).days % len(words)]
+        word = words[day % len(words)]
     else:
         word = random.choice(words)
 
@@ -172,7 +173,7 @@ else:
 
 if not args.no_emoji:
     print()
-    print(f"{'Daily ' if args.daily else ''}Termordle {'Hard mode ' if args.hard else ''}{i}/{args.tries}")
+    print(f"{'Daily ' if args.daily else ''}Termordle {'Hard mode ' if args.hard else ''}{str(day) + ' ' if args.daily else ''}{i}/{args.tries}")
     for guess in guesses:
         # slightly redundant i suppose
         colors = check_word(word, guess)
@@ -185,3 +186,4 @@ if not args.no_emoji:
                 print(EMOJI_GRAY, end="")
 
         print(f" ||`{guess.upper()}`||")
+    print("<https://github.com/frumpy4/termordle>")
