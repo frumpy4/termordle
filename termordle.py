@@ -154,7 +154,7 @@ for i in range(args.tries):
 
         print(f"\x1b[{i + 5}F", end="")
         print_letters()
-        print(f"\x1b[{i + 5}E", end=RESET)
+        print(f"\x1b[{i + 3}E", end=RESET)
 
         if colors == [GREEN] * 5:
             print(f"guessed correctly in {i + 1} word{'s' if i + 1 != 1 else ''}")
